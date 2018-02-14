@@ -17,33 +17,33 @@ public class QueenBoard{
   private boolean addQueen(int r, int c){
     if(board[r][c] == 0){
 	    board[r][c] = -1;
-	    for(int i = c + 1; i < size ; i++){
-        board[r][i] += 1;
-	    }
-	    for(int a = 1; a < size - c; a++){
-        board[r + a][c + a] += 1;
-	    }
-	    for(int b = 1; b < c ; b++){
-        board[r - b][c - b] += 1;
-	    }
-	    return true;
+	    for(int i = 1; c < size - i; i++){
+        board[r][c+i] += 1;
+        if (r < size - i){
+          board[r+i][c+i] += 1;
+        }
+        if (r >= i){
+          board[r-i][c+i] += 1;
+        }
+      }
+      return true;
     }
     return false;
   }
 
   private boolean removeQueen(int r, int c){
     if(board[r][c] == -1){
-	    board[r][c] = 0;
-	    for(int i = c + 1; i < size ; i++){
-        board[r][i] -= 1;
-	    }
-	    for(int a = 1; a < size - c; a++){
-        board[r + a][c + a] -= 1;
-	    }
-      for(int b = 1; b < c ; b++){
-        board[r - b][c - b] -= 1;
-	    }
-	    return true;
+      board[r][c] = 0;
+      for (int i=1; c<size - i; i++){
+        board[r][c+i] -= 1;
+        if (r < size - i){
+          board[r+i][c+i] -= 1;
+        }
+        if (r >= i){
+          board[r-i][c+i] -= 1;
+        }
+      }
+      return true;
     }
     return false;
   }
@@ -52,8 +52,7 @@ public class QueenBoard{
     for(int i = 0; i < size; i++){
       for(int j = 0; j < size; j++){
         if(board[i][j] != 0){
-          throw new IllegalStateException();
-            
+          throw new IllegalStateException();  
         }
       }
     }
@@ -69,8 +68,8 @@ public class QueenBoard{
         if(solveM(col + 1)){
           return true;
         }
+       removeQueen(col,i);
       }
-      removeQueen(col,i);
     }
     return false;
   }
@@ -78,25 +77,26 @@ public class QueenBoard{
   public int countSolutions(){
     for(int i = 0;i < size; i++){
       for(int j = 0; j < size; j++){
-        if(board[i][j] == 0){
+        if(board[i][j] != 0){
           throw new IllegalStateException();
         }
       }
     }
-    return countM(0,0);
+    return countM(0);
     }
 
-  public int countM(int col, int count){
-    if(col >= size){
-      return count;
+  public int countM(int col){
+    int result = 0;
+    if(col == size){
+      return 1;
     }
     for (int row = 0; row < board.length; row++) {
 	    if (addQueen(row,col)) {
-        count += countM(row+1,count + 1);
+        result += countM(col + 1);
         removeQueen(row,col);
 	    }
     }
-    return count;
+    return result;
   }
   
   public String toString(){
@@ -119,13 +119,32 @@ public class QueenBoard{
   }
     
   public static void main(String[]args){
-    QueenBoard test = new QueenBoard(5);
-    System.out.println(test);
-    test.addQueen(1,1);
-    test.addQueen(1,2);
-    //	test.removeQueen(1,1);
-		System.out.println(test);
-    System.out.println(test);
-    System.out.println(test);
+  QueenBoard b = new QueenBoard(10);
+    System.out.println(b.solve()); //prints true
+    System.out.println(b); //prints a valid solution
+    try{
+    b.solve();
+    }catch(IllegalStateException e){
+    System.out.println("Error: The board contains non-zero values");
+    } //prints "Error: The board contains non-zero values"
+    try{
+    b.countSolutions();
+    }catch(IllegalStateException e){
+    System.out.println("Error: The board contains non-zero values");
+    } //prints "Error: The board contains non-zero values"
+    for (int i = 0; i < 12; i++){
+    QueenBoard a = new QueenBoard(i);
+    System.out.println("# of Solutions for " + i + ": " + a.countSolutions());
+    /*          Expected Values
+    i --> # of Solutions   i --> # of Solutions
+    0 --> 1                      6 --> 4
+    1 --> 1                      7 --> 40
+    2 --> 0                      8 --> 92
+    3 --> 0                      9 --> 352
+    4 --> 2                    10 --> 724
+    5 --> 10                  11 --> 2680
+  */
+    System.out.println(a); //prints out an empty i by i grid of underscores
+    }
   }
 }
