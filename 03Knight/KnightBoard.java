@@ -1,26 +1,12 @@
 public class KnightBoard{
     private int[][] board;
-    private final int[] moveX = new int[4];
-    moveX[0] = -1;
-    moveX[1] = 1;
-    moveX[2] = -2;
-    moveX[3] = 2;
-    moveX[4] = -1;
-    moveX[5] = 1;
-    moveX[6] = -2;
-    moveX[7] = 2;
-    private final int[] moveY = new int[4];
-    moveX[0] = -1;
-    moveX[1] = 1;
-    moveX[2] = -2;
-    moveX[3] = 2;
-    moveX[4] = -1;
-    moveX[5] = 1;
-    moveX[6] = -2;
-    moveX[7] = 2;
+    private int length;
+    private final int[] moveX = {-1,1,-2,-2,-1,1,2,2};
+    private final int[] moveY = {1,-1,-1,1,2,2,-1,1};
     
     public KnightBoard(int startingRows, int startingCols){
 	board = new int[startingRows][startingCols];
+	length = startingRows * startingCols;
     }
 
     public boolean solve(int startingRow, int startingCol){
@@ -34,13 +20,26 @@ public class KnightBoard{
 		}
 	    }
 	}
-	return true; //solveH(int row, int col, int level)
+	return solveH(startingRow,startingCol,1);
     }
 
     private boolean solveH(int row, int col, int level){
-	if(!solveH(row,col,level)){
-
-	}
+	boolean result = false;
+	if(board[row][col] != 0 || level > length){
+	    for(int i = 0; i < board.length; i++){
+		for(int j = 0; j < board[i].length; j++){
+		    result = result || (board[i][j] != 0);
+		    //board[i][j] = 0;
+		    level = 1;
+		}
+	    }
+	}else{
+	    board[row][col] = level;
+	    for(int a = 0; a < 8; a++){
+		    result = result || solveH(row + moveX[a], col + moveY[a], level + 1);
+		}
+	    }
+	return result;  
     }
     
     public String toString(){
@@ -62,7 +61,8 @@ public class KnightBoard{
 	}
     
     public static void main(String[]args){
-	KnightBoard test = new KnightBoard(5,5);
-	System.out.println(test);
+	KnightBoard test = new KnightBoard(2,2);
+	//	test.solve(2,2);
+	System.out.println(test.solve(0,0));
     }
 }
