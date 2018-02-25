@@ -27,23 +27,6 @@ public class KnightBoard{
     return solveH(startingRow,startingCol,1);
   }
 
-  /* public boolean solveH(int row,int col,int level){
-    board[row][col] = level;
-    if (level == rows * cols){
-	    return true;
-    }
-    for (int i = 0;i < 8;i++){
-      if (!(row < 0 || row >= rows || col < 0 || col >= cols) && (board[row][col] == 0)){
-        if (solveH(row + moveX[i], col + moveY[i], level+1)){
-          return true;
-        }
-        board[row + moveX[i]][col + moveY[i]] = 0;
-      }
-    }
-    board[row][col] = 0;
-    return false;
-  }
-  */
  private boolean solveH(int row, int col, int level){
     board[row][col] = level;
     if (level == rows*cols){
@@ -80,22 +63,20 @@ public class KnightBoard{
 
   private int countH(int row, int col, int level){
     int result = 0;
-    if(board[row][col] != 0){
-      return 0;
-    }
+    board[row][col] = level;
     if(level == rows * cols){
       return 1;
     }
     for(int i = 0; i < 8; i++){
-      board[row][col] = level;
-      try {
-        if (board[row + moveX[i]][col + moveY[i]] == 0){
-          countH(row + moveX[i],col + moveY[i],level + 1);
-          board[row + moveX[i]][col + moveY[i]] = 0;
-        }
-	    } catch (ArrayIndexOutOfBoundsException e){
-	    }
+      int nextRow = row + moveX[i];
+      int nextCol = col + moveY[i];
+      if((!(nextRow < 0 || nextRow >= rows || nextCol < 0 || nextCol >= cols)
+          && (board[nextRow][nextCol] == 0))){
+        result += countH(nextRow,nextCol,level + 1);
+        board[nextRow][nextCol] = 0;
+      }
     }
+    board[row][col] = 0;
     return result;
   }
   
