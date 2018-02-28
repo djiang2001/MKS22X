@@ -25,31 +25,43 @@ private boolean animate;//false by default
 
     public Maze(String filename) throws FileNotFoundException{
 	    animate = false;
-	try{
-	    int s = 0;
-	    int e = 0;
-	    Scanner inf = new Scanner(text);
+	    File f = new File(filename);
+	    setMaze(filename);
 	    
-        while(inf.hasNextLine()){
-            String line = inf.nextLine();
-	    for(int i = 0; i < line.length(); i++){
-		maze[][i] = line.charAt(i);
-		
-	    }
-        } 
-	    
+	    Scanner inf = new Scanner(f);
+	    int row = 0;
+		while(inf.hasNextLine()){
+		    String line = inf.nextLine();
+		    for(int i = 0; i <line.length(); i++){
+			maze[row][i] = line.charAt(i);
+		    }
+		} 
+		  
 	}
 	
-	catch (FileNotFoundException e){
-	    System.out.println("Unable to find file: " + filename);
-	}
-
-	catch (IllegalStateException e){
-	    System.out.println("Invalid maze");
-	}
 	
     }
-    
+
+	  private void setMaze(String filename){
+	      File f = new File(filename);
+	      Scanner arrayer = new Scanner(f);
+	      int s = 0;
+	      int e = 0;
+	      int row = 0;
+	      while(inf.hasNextLine()){
+		  String line = arrayer.nextLine();
+		  for(i = 0; i < line.length(); i++){
+		      if(line.charAt(i).equals('S'){
+			      s++;
+			  }
+			  if(line.charAt(i).equals('E'){
+				  e++
+				     
+		  row += 1;
+	      }
+
+	      maze = char[row][line.length()]; 
+	  }
 
     private void wait(int millis){
 	try {
