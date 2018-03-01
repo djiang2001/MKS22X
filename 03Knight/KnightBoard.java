@@ -47,7 +47,7 @@ public class KnightBoard{
     return false;
 }
   
-  private int countSolutions(int startingRow, int startingCol){
+  public int countSolutions(int startingRow, int startingCol){
     for (int i = 0; i < rows; i++) {
 			for (int j = 0; j < cols; j++) {
 				if (board[i][j] != 0){
