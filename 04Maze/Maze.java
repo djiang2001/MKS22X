@@ -5,7 +5,6 @@ public class Maze{
     private boolean animate;//false by default
     private int[] moveX = {0,1,0,-1};
     private int[] moveY = {1,0,-1,0};
-    public int solution = 0;
     
     public Maze(String filename) throws FileNotFoundException{
 	animate = false;
@@ -84,48 +83,42 @@ public void clearTerminal(){
 	    }
 	}
 	maze[sRow][sCol] = ' ';
-	return solve(sRow,sCol);
+	return solve(sRow,sCol,0);
     }
 
-/*
-  Recursive Solve function:
-
-  A solved maze has a path marked with '@' from S to E.
-
-  Returns the number of @ symbols from S to E when the maze is solved,
-  Returns -1 when the maze has no solution.
-
-
-  Postcondition:
-
-  The S is replaced with '@' but the 'E' is not.
-
-  All visited spots that were not part of the solution are changed to '.'
-
-  Note: This is not required based on the algorithm, it is just nice visually to see.
-  All visited spots that are part of the solution are changed to '@'
-*/
-    private int solve(int row, int col){
+    private boolean isEnd(int row, int col){
+	return maze[row][col] == 'E';
+    }
+    
+    private int solve(int row, int col, int count){
 	if(animate){
 	    clearTerminal();
 	    System.out.println(this);
 	    wait(20);
 	}
-	
-	if(maze[row][col] == 'E'){
-	    return solution;
+	if(isEnd(row,col)){
+	    return count;
 	}
 	
 	for(int i = 0; i < 4; i++){
-	    if(!(maze[row+ moveX[i]][col + moveY[i]] == '@' ||
-		 maze[row+ moveX[i]][col + moveY[i]] == '.' ||
-		 maze[row+ moveX[i]][col + moveY[i]] == '#')){
-                maze[row+ moveX[i]][col + moveY[i]] = '@';
-        	return solve(row + moveX[i], col + moveY[i]);
+	    if(maze[row+ moveX[i]][col + moveY[i]] == ' ' ||
+		 maze[row+ moveX[i]][col + moveY[i]] == 'E'){
+		if(maze[row][col] == ' '){
+		    maze[row][col] = '@';
+		}
+		    return solve(row + moveX[i], col + moveY[i],count+1);
 	    }
-	} 
-	maze[row][col] = '.';
-	return -1; //so it compiles
+	}
+	
+	for(int i = 0; i < 4; i++){
+	    if(maze[row+ moveX[i]][col + moveY[i]] == '@'){
+		maze[row][col] = '.';
+                maze[row + moveX[i]][col + moveY[i]] = ' ';
+        	return solve(row + moveX[i], col + moveY[i],count-1);
+	    }
+	}
+
+	return -1;
     }
 
 public String toString(){
@@ -142,14 +135,13 @@ public String toString(){
     public static void main(String[]args){
         Maze f;
 	try{
-        f = new Maze("Maze1.txt");//true animates the maze.
+        f = new Maze("Maze3.txt");//true animates the maze.
         f.setAnimate(true);
-        f.solve();
+		System.out.println(f.solve());
         System.out.println(f);
+
 	}
 	catch(FileNotFoundException e){
 	}
     }
 }
-
-
