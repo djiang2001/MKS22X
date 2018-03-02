@@ -3,7 +3,10 @@ import java.io.*;
 public class Maze{
     private char[][]maze;
     private boolean animate;//false by default
-
+    private int[] moveX = {0,1,0,-1};
+    private int[] moveY = {1,0,-1,0};
+    public int solution = 0;
+    
     public Maze(String filename) throws FileNotFoundException{
 	animate = false;
 	File f = new File(filename);
@@ -64,32 +67,25 @@ public void setAnimate(boolean b){
 
 
 public void clearTerminal(){
-    //erase terminal, go to top left of screen.
     System.out.println("\033[2J\033[1;1H");
-
 }
 
 
 
-/*Wrapper Solve Function returns the helper function
-
-  Note the helper function has the same name, but different parameters.
-  Since the constructor exits when the file is not found or is missing an E or S, we can assume it exists.
-
-*/
-public int solve(){
-
-    //find the location of the S. 
-
-
-    //erase the S
-
-
-    //and start solving at the location of the s.
-
-    //return solve(???,???);
-    return 1;
-}
+    public int solve(){
+	int sRow = 0;
+	int sCol = 0;
+	for(int i = 0; i < maze.length; i++){
+	    for(int j = 0; j < maze[i].length; j++){
+		if(maze[i][j] == 'S'){
+		    sRow = i;
+		    sCol = j;
+		}
+	    }
+	}
+	maze[sRow][sCol] = ' ';
+	return solve(sRow,sCol);
+    }
 
 /*
   Recursive Solve function:
@@ -109,18 +105,28 @@ public int solve(){
   Note: This is not required based on the algorithm, it is just nice visually to see.
   All visited spots that are part of the solution are changed to '@'
 */
-private int solve(int row, int col){ //you can add more parameters since this is private
-
-    if(animate){
-	clearTerminal();
-	System.out.println(this);
-	wait(20);
+    private int solve(int row, int col){
+	if(animate){
+	    clearTerminal();
+	    System.out.println(this);
+	    wait(20);
+	}
+	
+	if(maze[row][col] == 'E'){
+	    return solution;
+	}
+	
+	for(int i = 0; i < 4; i++){
+	    if(!(maze[row+ moveX[i]][col + moveY[i]] == '@' ||
+		 maze[row+ moveX[i]][col + moveY[i]] == '.' ||
+		 maze[row+ moveX[i]][col + moveY[i]] == '#')){
+                maze[row+ moveX[i]][col + moveY[i]] = '@';
+        	return solve(row + moveX[i], col + moveY[i]);
+	    }
+	} 
+	maze[row][col] = '.';
+	return -1; //so it compiles
     }
-
-    //COMPLETE SOLVE
-
-    return -1; //so it compiles
-}
 
 public String toString(){
     String result = "";
