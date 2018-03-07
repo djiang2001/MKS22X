@@ -4,18 +4,23 @@ public class USACO{
 
     public static int bronze(String filename){
 	try{
-	    int r = 0;
-	    int c = 0;
 	    File f = new File(filename);
 	    Scanner inf = new Scanner(f);
-	    while(inf.hasNextLine()){
-		String s = inf.nextLine();
-		for(int i = 0; i < s.length(); i++){
-
+	    int r = inf.nextInt();
+	    int c = inf.nextInt();
+	    int e = inf.nextInt();
+	    int n = inf.nextInt();
+	    int[][] field = new int[r][c];
+	    for(int i = 0; i <field.length; i++){
+		for(int j = 0; j <field[i].length; j++){
+		    maze[i][j] = inf.nextInt();
 		}
 	    }
+
+	    
+	    
 	}
-	catch(){
+	catch(FileNotFoundException e){
 	}
 	
     }
