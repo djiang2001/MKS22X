@@ -29,16 +29,17 @@ public class USACO{
     }
 
     public static void main(String[] args){
-	System.out.println(bronze("Lake1.txt"));
-	System.out.println(bronze("Lake2.txt"));
-	System.out.println(bronze("Lake3.txt"));
-	System.out.println(bronze("Lake4.txt"));
-	System.out.println(bronze("Lake5.txt"));
-	System.out.println(bronze("Lake6.txt"));
-	System.out.println(bronze("Lake7.txt"));
-	System.out.println(bronze("Lake8.txt"));   
-	System.out.println(bronze("Lake9.txt"));
-	System.out.println(bronze("Lake10.txt"));
+	System.out.println(bronze("Lake1.txt"));//342144
+	System.out.println(bronze("Lake2.txt"));//103762432
+	System.out.println(bronze("Lake3.txt"));//1058992704
+	System.out.println(bronze("Lake4.txt"));//753121152
+	System.out.println(bronze("Lake5.txt"));//1028282688
+	System.out.println(bronze("Lake6.txt"));//72207936
+	System.out.println(bronze("Lake7.txt"));//
+	System.out.println(bronze("Lake8.txt"));// 
+	System.out.println(bronze("Lake9.txt"));//
+	System.out.println(bronze("Lake10.txt"));//211201344
+
 	
 	silver(file);
     }
