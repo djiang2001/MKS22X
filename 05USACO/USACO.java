@@ -3,6 +3,7 @@ import java.io.*;
 public class USACO{
 
     public static int bronze(String filename){
+	int result = 0;
 	try{
 	    File f = new File(filename);
 	    Scanner inf = new Scanner(f);
@@ -11,22 +12,51 @@ public class USACO{
 	    int e = inf.nextInt();
 	    int n = inf.nextInt();
 	    int[][] field = new int[r][c];
-	    for(int i = 0; i <field.length; i++){
+	    for(int i = 0; i < field.length; i++){
 		for(int j = 0; j <field[i].length; j++){
-		    maze[i][j] = inf.nextInt();
+		    field[i][j] = inf.nextInt();
+		}
+	    }
+	    int r1;
+	    int c1;
+	    int d;
+	    while(inf.hasNextLine()){
+		int r1 = inf.nextInt();
+		int c1 = inf.nextInt();
+		int d = inf.nextInt();
+		
+				    
+
+	    }
+	    /* int[][] moves = int[n][3];
+	    for(int row = 0; row < moves.length; row++){
+		for(int col = 0; col < 3; col++){
+		    moves[row][col] = inf.nextInt();
 		}
 	    }
 
+	    for(int rows = 0; rows < moves.length; rows++){
+		while(
+		field[moves[row][0] - 1][
+	    }
+	    */
+	    for(int a = 0; a < field.length; i++){
+		for(int b = 0; b < field[a].length; b++){
+		    result += field[a][b] - e
+			}
+	    }
+		
 	    
 	}
 	catch(FileNotFoundException e){
 	    System.out.println("No such file");
 	}
-	
+
+	    return result;
     }
 
     public static int silver(String filename){
-
+	
     }
 
     public static void main(String[] args){
