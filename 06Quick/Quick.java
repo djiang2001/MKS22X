@@ -33,7 +33,7 @@ public class Quick{
 		start = index + 1;
 	    }
 	}
-	return 0;
+	return data[index];
     }
 
     public static void quickSort(int[] data){
@@ -72,7 +72,11 @@ public class Quick{
 	int[] test = new int[] {15, 61, 57, 40, 83 ,12, 30, 87, 44, 69};
 	//System.out.println(partition(test, 0, 9));
 	//System.out.println(toString(test));
-	Quick.quickSort(test);
-	System.out.println(toString(test));
+	//	Quick.quickSort(test);
+	//	System.out.println(toString(test));
+	for (int i = 0; i < 6; i++){
+	    int[] ary = {2,10,15,23,0,5};
+	    System.out.println(Quick.quickselect(ary,i));
+	}
     }
 }
