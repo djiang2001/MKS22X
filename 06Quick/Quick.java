@@ -19,6 +19,30 @@ public class Quick{
 	return large;
     }
 
+    public static int part(int[] data, int lo, int hi){
+	int i = (int) Math.random()*(hi - lo + 1) + lo;
+	int pivot = data[i];
+	int lt = lo + 1;
+	int gt = hi;
+	swap(data,i,lo);
+	while(i <= gt){ 
+	    if(data[i] == pivot){
+		i++;
+	    }else
+		if(data[i] > pivot){
+		    swap(data, i, gt);
+		    gt--;
+		}else{
+		    swap(data, i, lt);
+		    lt++;
+		    i++;
+		}
+	}
+	swap(data,lo,lt-1) ;
+	return lt-1;
+    }
+
+    
       public static int quickselect(int[] data, int k){
 	int index = 0;
 	int start = 0;
@@ -69,14 +93,14 @@ public class Quick{
     }
     
     public static void main(String[] args){
-	int[] test = new int[] {15, 61, 57, 40, 83 ,12, 30, 87, 44, 69};
-	//System.out.println(partition(test, 0, 9));
-	//System.out.println(toString(test));
+	int[] test = new int[] {1 , 61, 57, 40, 83,100,100,100,100,100,100 ,12, 30, 87, 44, 69};
+	System.out.println(part(test, 0, 15));
+	System.out.println(toString(test));
 	//	Quick.quickSort(test);
 	//	System.out.println(toString(test));
-	for (int i = 0; i < 6; i++){
-	    int[] ary = {2,10,15,23,0,5};
-	    System.out.println(Quick.quickselect(ary,i));
-	}
-    }
+	/*	for (int i = 0; i < 6; i++){
+		int[] ary = {2,10,15,23,0,5};
+		System.out.println(Quick.quickselect(ary,i));
+		} */
+    } 
 }
