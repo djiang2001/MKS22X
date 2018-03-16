@@ -1,7 +1,7 @@
 import java.util.*;
 public class Quick{
 
-    public static int partition(int[] data, int start, int end){
+     public static int partition(int[] data, int start, int end){
 	int index = (int) Math.random()*(end - start + 1) + start;
 	int pivot = data[index];
 	int small = start + 1;
@@ -20,9 +20,10 @@ public class Quick{
     }
 
     public static int part(int[] data, int lo, int hi){
-	int i = (int) Math.random()*(hi - lo + 1) + lo;
+	int i = (int) (Math.random()*hi - lo + 1) + lo;
+	System.out.println(data[i]);
 	int pivot = data[i];
-	int lt = lo + 1;
+	int lt = lo;
 	int gt = hi;
 	swap(data,i,lo);
 	while(i <= gt){ 
@@ -38,8 +39,7 @@ public class Quick{
 		    i++;
 		}
 	}
-	swap(data,lo,lt-1) ;
-	return lt-1;
+	return data[lt];
     }
 
     
@@ -93,8 +93,9 @@ public class Quick{
     }
     
     public static void main(String[] args){
-	int[] test = new int[] {1 , 61, 57, 40, 83,100,100,100,100,100,100 ,12, 30, 87, 44, 69};
-	System.out.println(part(test, 0, 15));
+	//	int[] test = new int[] {1 , 61, 57, 40, 83,100,100,100,100,100,100 ,12, 30, 87, 44, 69};
+	int[] test = new int[] {1,2,3,4,5,6,7,8,9,0,1,2,3,4,5};
+	System.out.println(part(test, 0, 14));
 	System.out.println(toString(test));
 	//	Quick.quickSort(test);
 	//	System.out.println(toString(test));
