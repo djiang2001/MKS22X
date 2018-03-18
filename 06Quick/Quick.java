@@ -1,7 +1,7 @@
 import java.util.*;
 public class Quick{
 
-     public static int partition(int[] data, int start, int end){
+    /*    public static int partition1(int[] data, int start, int end){
 	int index = (int) Math.random()*(end - start + 1) + start;
 	int pivot = data[index];
 	int small = start + 1;
@@ -18,37 +18,13 @@ public class Quick{
 	swap(data,start,large);
 	return large;
     }
-
-    public static int part(int[] data, int lo, int hi){
-	int i = (int) (Math.random()*hi - lo + 1) + lo;
-	System.out.println(data[i]);
-	int pivot = data[i];
-	int lt = lo;
-	int gt = hi;
-	swap(data,i,lo);
-	while(i <= gt){ 
-	    if(data[i] == pivot){
-		i++;
-	    }else
-		if(data[i] > pivot){
-		    swap(data, i, gt);
-		    gt--;
-		}else{
-		    swap(data, i, lt);
-		    lt++;
-		    i++;
-		}
-	}
-	return data[lt];
-    }
-
     
-      public static int quickselect(int[] data, int k){
+    public static int quickselect1(int[] data, int k){
 	int index = 0;
 	int start = 0;
 	int end = data.length-1;
 	for(int i = 0; i < data.length; i++){
-	    index = partition(data, start, end);
+	    index = partition1(data, start, end);
 	    if(index == k){
 		return data[k];
 	    }else if(k <= index){
@@ -60,19 +36,74 @@ public class Quick{
 	return data[index];
     }
 
-    public static void quickSort(int[] data){
-	quickSortH(data,0,data.length - 1);
+    public static void quickSort1(int[] data){
+	quickSortH1(data,0,data.length - 1);
     }
 
-    public static void quickSortH(int[] data, int low, int hi){
+    public static void quickSortH1(int[] data, int low, int hi){
 	if(low < hi){
-	    int part = partition(data,low,hi);
-	    quickSortH(data, low, part - 1);
-	    quickSortH(data, part + 1, hi);
+	    int part = partition1(data,low,hi);
+	    quickSortH1(data, low, part - 1);
+	    quickSortH1(data, part + 1, hi);
+	}
+
+    } */
+    //--NEW--//
+    public static int[] partition(int[] data, int lo, int hi){
+	int p = (int) (Math.random()*(hi - lo) + lo);
+	//System.out.println(data[p]);
+	int pivot = data[p];
+	int i = lo;
+	int lt = lo;
+	int gt = hi;
+	swap(data,p,lo);
+	while(i <= gt){ 
+	    if(data[i] == pivot){
+		i++;
+	    }else
+		if(data[i] > pivot){
+		    swap(data, i, gt);
+ 		    gt--;
+		}else{
+		    swap(data, i, lt);
+		    lt++;
+		    i++;
+		}
+	}
+	int[] parted = new int[]{lt,gt};
+	return parted;
+    }
+
+    public static int quickselect(int[] data, int k){
+	int start = 0;
+	int end = data.length-1;
+	int[] index = partition(data, start, end);
+	for(int i = 0; i<data.length; i++){
+	    if(index[0]<=k && index[1]>=k){
+		return data[k];
+	    }else if(k <= index[0]){
+		end = index[0] - 1;
+	    }else if(k > index[1]){
+		start = index[1]+1;
+	    }
+	    index = partition(data, start, end);
+	}
+	return data[k];
+    }
+	
+    public static void quicksort(int[] data){
+	quicksortH(data,0,data.length-1);
+    }
+
+    public static void quicksortH(int[] data, int lo, int hi){
+	if( lo < hi){
+	    int[] part = partition(data,lo,hi);
+	    quicksortH(data,lo,part[0] - 1);
+	    quicksortH(data, part[1] + 1, hi);
 	}
 
     }
-    
+    //--Basic--//
     private static void swap(int[] data, int a, int b){
 	int temp = data[a];
 	data[a] = data[b];
@@ -83,25 +114,27 @@ public class Quick{
 	String result = "[";
 	for (int i = 0; i < data.length; i++){
 	    if(i < data.length - 1){
-	    result += data[i] + ", ";
+		result += data[i] + ", ";
 	    }else{
-	    result += data[i];
+		result += data[i];
 	    }
 	}
 	result += "]";
 	return result;
     }
     
-    public static void main(String[] args){
-	//	int[] test = new int[] {1 , 61, 57, 40, 83,100,100,100,100,100,100 ,12, 30, 87, 44, 69};
-	int[] test = new int[] {1,2,3,4,5,6,7,8,9,0,1,2,3,4,5};
-	System.out.println(part(test, 0, 14));
-	System.out.println(toString(test));
-	//	Quick.quickSort(test);
-	//	System.out.println(toString(test));
-	/*	for (int i = 0; i < 6; i++){
-		int[] ary = {2,10,15,23,0,5};
-		System.out.println(Quick.quickselect(ary,i));
-		} */
-    } 
+ 
+  public static void main(String[]args){
+    int[] ary = {9,8,7,6,5,4,3,2,1,0,-1,-2,-3,-4,-5};
+    System.out.println(Quick.quickselect(ary,5) + " <- Should be 0");
+    int[] ary1 = {9,5,8,7,5,6,5,-3,4,5,3,4,5,1,2,3,4,4,3,5,4,3};
+    System.out.println(Quick.quickselect(ary1,19) + " <- Should be 7");
+    System.out.println(Quick.quickselect(ary1,13) + " <- Should be 5");
+    System.out.println(Quick.quickselect(ary1,0) + " <- Should be -3");
+    System.out.println(Quick.quickselect(ary1,ary1.length-1) + " <- Should be 9");
+    int[] ary2 = {3,6,1,2,4,6,8,99,1,2,32,45,123,-23,12,-30,-12,-3};
+    Quick.quicksort(ary2);
+    System.out.println("Your sorted array" + "\n" + Arrays.toString(ary2));
+    System.out.println("The correct array\n[-30, -23, -12, -3, 1, 1, 2, 2, 3, 4, 6, 6, 8, 12, 32, 45, 99, 123]");
+  }
 }
