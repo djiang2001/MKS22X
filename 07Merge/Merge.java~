@@ -1,0 +1,12 @@
+public class Merge{
+
+    public static void msort(int[] data, int[] temp,int lo, int hi){
+
+    }
+
+    public static void merge(int[] data, int[] temp, int lo, int mid, int hi){
+	
+    }
+
+    
+}
