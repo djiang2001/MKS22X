@@ -3,7 +3,7 @@ public class Merge{
     
     public static void mergesort(int[] data){
 	int[] temp = new int[data.length];
-	msort(data,temp,data[0],data[data.length-1]);
+	msort(data,temp,0,data.length-1);
     }
     
     private static void msort(int[] data, int[] temp,int lo, int hi){
@@ -20,15 +20,20 @@ public class Merge{
     }
 
     public static void merge(int[] data, int[] temp, int lo, int mid, int hi){
-	for(int i = 0; i <= hi; i++){
-	    if(temp[lo] < temp[mid]){
-		data[i] = temp[lo];
+	
+	for(int i = lo; i < mid - 1 && mid - 1 <= hi; i++){
+	    if(data[lo] <= data[mid+1]){
+		temp[i] = data[lo];
 		lo++;
-	    }else if(temp[mid] < temp[lo]){
-		data[i] = temp[mid];
+	    }else if(data[mid+1] < data[lo]){
+		temp[i] = data[mid+1];
 		mid++;
 	    }
 	}
+	for(int j = lo; j <= hi; j++){
+	    data[j] = temp[j];
+	}
+	
     }
     
     public static void main(String[] args){
