@@ -7,37 +7,49 @@ public class Merge{
     }
     
     private static void msort(int[] data, int[] temp,int lo, int hi){
-	for(int i = lo; i <= hi; i++){
-	    temp[i] = data[i];
+	if(lo < hi){
+	    for(int i = lo; i <= hi; i++){
+		temp[i] = data[i];
+	    }
+	   int mid = (lo + hi)/ 2;
+	    msort(temp, data, lo, mid);
+	    msort(temp, data, mid + 1, hi);
+	    merge(data, temp, lo, mid, hi);
 	}
-	if(lo >= hi){
-	    return;
-	}
-	int mid = (lo + hi)/ 2;
-	msort(temp, data, lo, mid);
-	msort(temp, data, mid + 1, hi);
-	merge(data, temp, lo, mid, hi);
     }
 
     public static void merge(int[] data, int[] temp, int lo, int mid, int hi){
-	
-	for(int i = lo; i < mid - 1 && mid - 1 <= hi; i++){
-	    if(data[lo] <= data[mid+1]){
-		temp[i] = data[lo];
-		lo++;
-	    }else if(data[mid+1] < data[lo]){
-		temp[i] = data[mid+1];
-		mid++;
-	    }
+        int i = lo;
+        int j = mid + 1;
+	int k = lo;
+        while (i <= mid && j <= hi) {
+            if (data[i] <= data[j]) {
+                temp[k] = data[i];
+                i++;
+	    } else {
+                temp[k] = data[j];
+                j++;
+		}
+		k++;
+		
+        }
+        while (i < mid + 1) {
+            temp[k] = data[i];
+            k++;
+            i++;
+        }
+	while(j <= hi){
+	    temp[k] = data[j];
+	    j++;
+	    k++;
+	}	
+	for(int a = lo; a <= hi; a++){
+	    data[a] = temp[a];
 	}
-	for(int j = lo; j <= hi; j++){
-	    data[j] = temp[j];
-	}
-	
     }
     
     public static void main(String[] args){
-	int[] test ={1,6,3,8,5,6,7,5,7,8,5,4,2};
+	int[] test =new int[]{1,6,3,8,5,6,7,5,7,8,5,4,2};
         mergesort(test);
 	System.out.println(Arrays.toString(test));
     }
