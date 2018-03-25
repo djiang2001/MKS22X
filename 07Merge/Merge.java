@@ -1,17 +1,6 @@
 import java.util.*;
 public class Merge{
 
-    public static void insertionSort(int[] data,int lo, int hi){
-	for(int i = 0;i<ary.length;i++){
-	    int temp = ary[i];
-	    int j = i - 1;
-	    while(j >= 0 && temp < ary[j]){
-		ary[j+1] = ary[j];
-		j--;
-	    }
-	    ary[j+1] = temp;
-	}
-    }
     
     public static void mergesort(int[] data){
 	int[] temp = new int[data.length];
