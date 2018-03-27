@@ -52,6 +52,5 @@ public class Merge{
     public static void main(String[] args){
 	int[] test =new int[]{1,6,3,8,5,6,7,5,7,8,5,4,2};
         mergesort(test);
-	System.out.println(Arrays.toString(test));
     }
 }
