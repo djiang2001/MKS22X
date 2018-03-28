@@ -1,0 +1,21 @@
+public class MyLinkedList{
+
+    boolean add(int value) {
+	
+    }
+  
+    int size(){
+    }
+    toString(){
+	
+    }
+    
+    int get(int index){
+    }
+    
+    int set(int index,int newValue){
+
+    }
+
+
+}
