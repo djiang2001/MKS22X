@@ -7,6 +7,33 @@ public class MyLinkedList{
 	length = 0;
     }
 
+    public void clear(){
+	first.setValue(0);
+	first.setNext(0)
+	last = first;
+	last.setPrev(0);
+    }
+    
+    public int size(){
+	return length;
+    }
+
+    private Node getNode(int index){
+	Node current = first;
+	for(int i = index; i >= 0; i--){
+	    current = Node.getNext();
+	}
+	return current;
+    }
+
+    public String toString(){
+	String result = "";
+	for(int i = 0; i< length - 1; i++){
+	    result += getNode(i);
+	}
+	return result;
+    }
+    
     private class Node{
 	private Node next, prev;
 	private int data;
@@ -42,5 +69,12 @@ public class MyLinkedList{
 	public String toString(){
 	    return "" + this.getValue;
 	}
+    }
+
+    public static void main(String[]args){
+	MyLinkedList test = new MyLinkedList();
+	test.add(1);
+	test.add(2);
+	System.out.println(test);
     }
 }
