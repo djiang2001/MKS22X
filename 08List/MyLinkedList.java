@@ -18,9 +18,24 @@ public class MyLinkedList{
 	return length;
     }
 
+    public void add(int index, Integer value){
+	if(index > length){
+	    throw new ArrayOutOfBoundsException();
+	    if(length = 0){
+		first.setValue(value);
+		length++;
+		last = first;
+	    }else
+		if(length = 1){
+		
+		    length++;
+		}
+	}
+    
+
     private Node getNode(int index){
 	Node current = first;
-	for(int i = index; i >= 0; i--){
+	for(int i = 0; i < length; i++){
 	    current = Node.getNext();
 	}
 	return current;
@@ -29,7 +44,7 @@ public class MyLinkedList{
     public String toString(){
 	String result = "";
 	for(int i = 0; i< length - 1; i++){
-	    result += getNode(i);
+	    result += getNode(i).getValue();
 	}
 	return result;
     }
