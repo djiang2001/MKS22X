@@ -1,44 +1,19 @@
 public class MyLinkedList{
     private Node first, last;
     private int length;
-    public MyLinkedList(){
-	first = new Node(0);
-	next = new Node(0);
-	length = 0;
-    }
 
-    public void clear(){
-	first.setValue(0);
-	first.setNext(0)
-	last = first;
-	last.setPrev(0);
-    }
-    
-    public int size(){
-	return length;
-    }
-
-    public void add(int index, Integer value){
-	if(index > length){
-	    throw new ArrayOutOfBoundsException();
-	    if(length = 0){
-		first.setValue(value);
-		length++;
-		last = first;
-	    }else
-		if(length = 1){
-		
-		    length++;
-		}
-	}
-    
-
+    //Important Method
     private Node getNode(int index){
 	Node current = first;
 	for(int i = 0; i < length; i++){
-	    current = Node.getNext();
+	    current = current.getNext();
 	}
 	return current;
+    }
+
+    //Constructor
+    public MyLinkedList(){
+	length = 0;
     }
 
     public String toString(){
@@ -48,12 +23,32 @@ public class MyLinkedList{
 	}
 	return result;
     }
+
+    public void clear(){
+	length = 0;
+	first 
+    }
     
+    public int size(){
+	return length;
+    }
+
+    public Integer get(int index){
+
+
+    }
+
+ 
+    /////////////////////////
+    ///       Node        ///
+    ////////////////////////
+
+		
     private class Node{
 	private Node next, prev;
-	private int data;
+	private Integer data;
 
-	public Node(int data){
+	public Node(Integer data){
 	    this.data = data;
 	}
     
@@ -65,31 +60,38 @@ public class MyLinkedList{
 	    this.data = newValue;
 	}
 	
-	public int getPrev(){
+	public Node getPrev(){
 	    return prev;
 	}
 
-	public void setPrev(int newValue){
-	    prev.setValue(newValue); 
+	public void setPrev(Node newValue){
+	    prev = newValue; 
 	}
 
-	public int getNext(){
+	public Node getNext(){
 	    return next;
 	}
 
-	public void setNext(int newValue){
-	    next.setValue(newValue);
+	public void setNext(Node newValue){
+	    next = newValue;
 	}
 
 	public String toString(){
-	    return "" + this.getValue;
+	    return "" + data;
 	}
     }
+	    
 
+    ////////
+    //Main//
+    ////////
+
+	    
     public static void main(String[]args){
 	MyLinkedList test = new MyLinkedList();
 	test.add(1);
 	test.add(2);
 	System.out.println(test);
     }
+    
 }
