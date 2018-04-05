@@ -1,59 +1,117 @@
 public class MyLinkedList{
     private Node first, last;
     private int length;
+
+    //Important Method
+    private Node getNode(int index){
+	Node current = first;
+	if(index == length - 1){
+	    return end;
+	}
+	for(int i = index; i > 0; i--){
+	    current = current.getNext();
+	}
+	return current;
+    }
+
+    //Constructor
     public MyLinkedList(){
-	first = new Node(0);
-	next = new Node(0);
 	length = 0;
     }
 
+    public String toString(){
+	String result = "[";
+	for(int i = 0; i< length; i++){
+	    result += getNode(i).getValue();
+	    if(i != length - 1){
+		result += ",";
+	    }
+	}
+	result += "]";
+	return result;
+    }
+
     public void clear(){
-	first.setValue(0);
-	first.setNext(0)
-	last = first;
-	last.setPrev(0);
+	length = 0;
+	first = null;
+	last = null;
     }
     
     public int size(){
 	return length;
     }
 
-    public void add(int index, Integer value){
-	if(index > length){
-	    throw new ArrayOutOfBoundsException();
-	    if(length = 0){
-		first.setValue(value);
-		length++;
-		last = first;
-	    }else
-		if(length = 1){
-		
-		    length++;
-		}
+    public Integer get(int index){
+	if(index < 0 || index >= length){
+	    throw new IndexOutOfBoundsException();
 	}
-    
+	return getNode(index).getValue();
+    }
 
-    private Node getNode(int index){
-	Node current = first;
+    public Integer set(int index, Integer value){
+	if(index < 0 || index >= length){
+	    throw new IndexOutOfBoundsException();
+	}
+        Node target = getNode(index);
+        Integer oldValue = target.getValue();
+	target.setValue(value);
+	return oldValue;
+    }
+
+    public int indexOf(Integer value){
 	for(int i = 0; i < length; i++){
-	    current = Node.getNext();
+	    if(getNode(i).getValue() == value){
+		return i;
+	    }
 	}
-	return current;
+	return -1;
     }
 
-    public String toString(){
-	String result = "";
-	for(int i = 0; i< length - 1; i++){
-	    result += getNode(i).getValue();
+    public boolean add(Integer newData){
+	Node data = new Node(newData);
+	if(length == 0){
+	    first = data;
+	    last = first;
 	}
-	return result;
+	else {
+	    last.setNext(data);
+	    data.setPrev(last);
+	    last = data;
+	}
+	length++;
+    }
+
+    public void add(int index,Integer value){
+	if(index < 0 || index > size()){
+	    throw new IndexOutOfBoundsException();
+	}
+	if(index == size()){
+	    add(value);
+	}
+	else if(index == 0){
+	    Node data = new Node(value);
+	    data.setNext(first);
+	    first.setPrev(data);
+	    first = data;
+	    length++;
+	}else{
+	    Node data = new Node(value);
+	    
+
+
+
     }
     
+    /////////////////////////
+    ///       Node        ///
+    ////////////////////////
+
+		
     private class Node{
 	private Node next, prev;
-	private int data;
+	private Integer data;
 
-	public Node(int data){
+	public Node(Integer data){
 	    this.data = data;
 	}
     
@@ -65,31 +123,38 @@ public class MyLinkedList{
 	    this.data = newValue;
 	}
 	
-	public int getPrev(){
+	public Node getPrev(){
 	    return prev;
 	}
 
-	public void setPrev(int newValue){
-	    prev.setValue(newValue); 
+	public void setPrev(Node newValue){
+	    prev = newValue; 
 	}
 
-	public int getNext(){
+	public Node getNext(){
 	    return next;
 	}
 
-	public void setNext(int newValue){
-	    next.setValue(newValue);
+	public void setNext(Node newValue){
+	    next = newValue;
 	}
 
 	public String toString(){
-	    return "" + this.getValue;
+	    return "" + data;
 	}
     }
+	    
 
+    ////////
+    //Main//
+    ////////
+
+	    
     public static void main(String[]args){
 	MyLinkedList test = new MyLinkedList();
 	test.add(1);
 	test.add(2);
 	System.out.println(test);
     }
+    
 }
