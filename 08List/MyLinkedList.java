@@ -1,14 +1,14 @@
 public class MyLinkedList{
-    private Node first, last;
+ private Node first, last;
     private int length;
 
-    //Important Method
+    //Impor0tant Method
     private Node getNode(int index){
 	Node current = first;
 	if(index == length - 1){
 	    return last;
 	}
-	for(int i = index; i > 0; i--){
+	for(int i = 0; i < index; i++){
 	    current = current.getNext();
 	}
 	return current;
@@ -44,14 +44,14 @@ public class MyLinkedList{
     }
 
     public Integer get(int index){
-	if(index < 0 || index >= length){
+	if(index < 0 || index >= size()){
 	    throw new IndexOutOfBoundsException();
 	}
 	return getNode(index).getValue();
     }
 
     public Integer set(int index, Integer value){
-	if(index < 0 || index >= length){
+	if(index < 0 || index >= size()){
 	    throw new IndexOutOfBoundsException();
 	}
         Node target = getNode(index);
@@ -62,7 +62,7 @@ public class MyLinkedList{
 
     public int indexOf(Integer value){
 	Node current = first;
-	for(int i = 0; i < length; i++){
+	for(int i = 0; i < size(); i++){
 	    if(current.getValue().equals(value)){
 		return i;
 	    }
@@ -107,8 +107,8 @@ public class MyLinkedList{
 	    data.setPrev(prev);
 	    next.setPrev(data);
 	    prev.setNext(data);
+	    length++;
 	}
-	length++;
     }
 
     public boolean remove(Integer value){
@@ -123,18 +123,22 @@ public class MyLinkedList{
 	return false;
     }
 
+
     public Integer remove(int index){
-	if(index > length || index < 0){
+	if(index < 0 || index >= length){
 	    throw new IndexOutOfBoundsException();      
 	}
 	Node target = getNode(index);
 	Integer oldValue = target.getValue();
-	if (index == 0){
+	if(length == 1){
+	    first = null;
+	    last = null;
+	}else if(index == 0){
 	    first = first.getNext();
 	    first.setPrev(null);
 	}
 
-	else if (index == length -1){
+	else if (index == length - 1){
 	    last = getNode(index - 1);
 	    last.setNext(null);
 	}
@@ -159,13 +163,15 @@ public class MyLinkedList{
 
 	public Node(Integer data){
 	    this.data = data;
+	    prev = null;
+	    next = null;
 	}
     
 	public Integer getValue(){
 	    return data;
 	}
 
-	public void setValue(int newValue){
+	public void setValue(Integer newValue){
 	    this.data = newValue;
 	}
 	
@@ -189,10 +195,11 @@ public class MyLinkedList{
 	    return "" + data;
 	}
     }
-    
+
     ////////
     //Main//
     ////////
+
 
 
 }
