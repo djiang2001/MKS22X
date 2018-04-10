@@ -1,4 +1,4 @@
-public class MyLinkedListImproved<T> implements Iterable<T>{
+public class MyLinkedListImproved<T> implements Iterable<T> extends Comparable<T>{
  private Node first, last;
     private int length;
 
@@ -195,7 +195,40 @@ public class MyLinkedListImproved<T> implements Iterable<T>{
 	    return "" + data;
 	}
     }
+    ///////////
+    //Compare//
+    //////////
 
+    public int max(){
+	if(length == 1){
+	    return 0;
+	}
+	int i = 0;
+	while(length - i > 1){
+	    T current = first.getValue();
+	    int currentIndex = 0;
+	    T next = first.getNext().getValue();
+	    int nextIndex = 1;
+	    if(current.compareTo(next) > 0){
+		next = next.getNext.getValue();
+		nextIndex++;
+		i++;
+	    }else
+		if(current.compareTo(next) < 0){
+		    current = next;
+		    next = next.getNext.getValue();
+		    currentIndex = nextIndex;
+		    nextIndex++;
+		    i++;
+		}
+	}
+	return -1;
+    }
+
+    public int min(){
+
+
+    }
     ////////////
     //Iterator//
     ////////////
