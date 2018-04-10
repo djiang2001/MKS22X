@@ -1,8 +1,8 @@
-public class MyLinkedList{
+public class MyLinkedListImproved<T> implements Iterable<T>{
  private Node first, last;
     private int length;
 
-    //Impor0tant Method
+    //Important Method
     private Node getNode(int index){
 	Node current = first;
 	if(index == length - 1){
@@ -15,7 +15,7 @@ public class MyLinkedList{
     }
 
     //Constructor
-    public MyLinkedList(){
+    public MyLinkedListImproved(){
 	length = 0;
     }
 
@@ -43,24 +43,24 @@ public class MyLinkedList{
 	return length;
     }
 
-    public Integer get(int index){
+    public T get(int index){
 	if(index < 0 || index >= size()){
 	    throw new IndexOutOfBoundsException();
 	}
 	return getNode(index).getValue();
     }
 
-    public Integer set(int index, Integer value){
+    public T set(int index, T value){
 	if(index < 0 || index >= size()){
 	    throw new IndexOutOfBoundsException();
 	}
         Node target = getNode(index);
-        Integer oldValue = target.getValue();
+        T oldValue = target.getValue();
 	target.setValue(value);
 	return oldValue;
     }
 
-    public int indexOf(Integer value){
+    public int indexOf(T value){
 	Node current = first;
 	for(int i = 0; i < size(); i++){
 	    if(current.getValue().equals(value)){
@@ -71,7 +71,7 @@ public class MyLinkedList{
 	return -1;
     }
 
-    public boolean add(Integer newData){
+    public boolean add(T newData){
 	Node data = new Node(newData);
 	if(length == 0){
 	    first = data;
@@ -86,7 +86,7 @@ public class MyLinkedList{
 	return true;
     }
 
-    public void add(int index,Integer value){
+    public void add(int index,T value){
 	if(index < 0 || index > size()){
 	    throw new IndexOutOfBoundsException();
 	}
@@ -111,7 +111,7 @@ public class MyLinkedList{
 	}
     }
 
-    public boolean remove(Integer value){
+    public boolean remove(T value){
 	Node current = first;
 	for (int i = 0; i < length; i++){
 	    if(current.getValue().equals(value)){
@@ -124,12 +124,12 @@ public class MyLinkedList{
     }
 
 
-    public Integer remove(int index){
+    public T remove(int index){
 	if(index < 0 || index >= length){
 	    throw new IndexOutOfBoundsException();      
 	}
 	Node target = getNode(index);
-	Integer oldValue = target.getValue();
+	T oldValue = target.getValue();
 	if(length == 1){
 	    first = null;
 	    last = null;
@@ -159,19 +159,19 @@ public class MyLinkedList{
 		
     private class Node{
 	private Node next, prev;
-	private Integer data;
+	private T data;
 
-	public Node(Integer data){
+	public Node(T data){
 	    this.data = data;
 	    prev = null;
 	    next = null;
 	}
     
-	public Integer getValue(){
+	public T getValue(){
 	    return data;
 	}
 
-	public void setValue(Integer newValue){
+	public void setValue(T newValue){
 	    this.data = newValue;
 	}
 	
@@ -196,10 +196,31 @@ public class MyLinkedList{
 	}
     }
 
+    ////////////
+    //Iterator//
+    ////////////
+
+
+    private class ListIterator implements Iterator <T>{
+	private Node current;
+
+	public ListIterator(Node first){
+	    current = first;
+	}
+
+	public boolean hasNext(){
+	    return !(nextNode == null);
+	}
+
+	public T next(){
+	    T result = current.getValue;
+	    current = current.getNext();
+	    return result;
+	}
+    }
     ////////
     //Main//
     ////////
-
 
 
 }
