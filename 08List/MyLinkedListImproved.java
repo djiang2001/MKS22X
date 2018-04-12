@@ -200,35 +200,26 @@ public class MyLinkedListImproved<T> implements Iterable<T> extends Comparable<T
     //////////
 
     public int max(){
-	if(length == 1){
-	    return 0;
+	int max = 0;
+	Node current = first;
+	for(int i = 0; i < length; i++){	
+	    if(current.getValue().compareTo(current.getNext().getValue()) > 1){
+		max = i;
+	    }
+	    current = current.getNext();
 	}
-	int i = 0;
-	while(length - i > 1){
-	    T current = first.getValue();
-	    int currentIndex = 0;
-	    T next = first.getNext().getValue();
-	    int nextIndex = 1;
-	    if(current.compareTo(next) > 0){
-		next = next.getNext.getValue();
-		nextIndex++;
-		i++;
-	    }else
-		if(current.compareTo(next) < 0){
-		    current = next;
-		    next = next.getNext.getValue();
-		    currentIndex = nextIndex;
-		    nextIndex++;
-		    i++;
-		}
-	}
-	return -1;
+	return max;
     }
 
-    public int min(){
+    // public int min(){
 
 
-    }
+    //}
+
+    //public void extend(MyLinkedListImproved<T> other){
+
+
+    //}
     ////////////
     //Iterator//
     ////////////
@@ -254,6 +245,8 @@ public class MyLinkedListImproved<T> implements Iterable<T> extends Comparable<T
     ////////
     //Main//
     ////////
+    public static void main(String[] args){
 
+    }
 
 }
