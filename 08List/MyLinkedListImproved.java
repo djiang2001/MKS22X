@@ -1,5 +1,6 @@
-public class MyLinkedListImproved<T> implements Iterable<T> extends Comparable<T>{
- private Node first, last;
+import java.util.*;
+public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T> {
+    private Node first, last;
     private int length;
 
     //Important Method
@@ -202,19 +203,28 @@ public class MyLinkedListImproved<T> implements Iterable<T> extends Comparable<T
     public int max(){
 	int max = 0;
 	Node current = first;
+	T compare = first.getValue();
 	for(int i = 0; i < length; i++){	
-	    if(current.getValue().compareTo(current.getNext().getValue()) > 1){
+	    if(compare.compareTo(current.getValue()) > 0){
 		max = i;
+		compare = current.getValue();
 	    }
 	    current = current.getNext();
 	}
 	return max;
     }
 
-    // public int min(){
-
-
-    //}
+    public int min(){
+	int min = 0;
+	Node current = first;
+	for(int i = 0; i < length; i++){	
+	    if(current.getValue().compareTo(getNode(i).getValue()) < 0){
+		min = i;
+		current = getNode(i);
+	    }
+	}
+	return min;
+    }
 
     //public void extend(MyLinkedListImproved<T> other){
 
@@ -224,20 +234,23 @@ public class MyLinkedListImproved<T> implements Iterable<T> extends Comparable<T
     //Iterator//
     ////////////
 
+    public Iterator<T> iterator(){
+	return new ListIterator(first);
+    }
 
-    private class ListIterator implements Iterator <T>{
+    private class ListIterator implements Iterator<T>{
 	private Node current;
 
-	public ListIterator(Node first){
-	    current = first;
+	public ListIterator(Node data){
+	    current = data;
 	}
 
 	public boolean hasNext(){
-	    return !(nextNode == null);
+	    return !(current == null);
 	}
 
 	public T next(){
-	    T result = current.getValue;
+	    T result = current.getValue();
 	    current = current.getNext();
 	    return result;
 	}
@@ -246,7 +259,12 @@ public class MyLinkedListImproved<T> implements Iterable<T> extends Comparable<T
     //Main//
     ////////
     public static void main(String[] args){
-
+	MyLinkedListImproved<Integer> test = new MyLinkedListImproved<>();
+	test.add(1);
+	System.out.println(test);
+	test.add(2);
+	System.out.println(test);
+	System.out.println(test.max());
     }
 
 }
