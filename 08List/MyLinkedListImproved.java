@@ -272,7 +272,7 @@ public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T
 	////////
     //Main//
     ////////
-    public static void main(String[] args){
+    /*  public static void main(String[] args){
 	MyLinkedListImproved<Integer> test = new MyLinkedListImproved<>();
 	MyLinkedListImproved<Integer> test2 = new MyLinkedListImproved<>();
 	test.add(1);
@@ -288,5 +288,5 @@ public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T
 	System.out.println(test.size());
 	System.out.println(test2.size());
     }
-
+    */
 }

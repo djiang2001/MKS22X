@@ -230,10 +230,15 @@ public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T
     }
 
     public void extend(MyLinkedListImproved<T> other){
+	if(size() == 0){
+	    first = other.first;
+	    last = other.last;
+	} else if(other.size() != 0){
+	    last.setNext(other.getNode(0));
+	    other.getNode(0).setPrev(last);
+	    last = other.getNode(other.size()-1);
+	}
 	length = this.size() + other.size();
-	last.setNext(other.getNode(0));
-	other.getNode(0).setPrev(last);
-	last = other.getNode(other.size()-1);
 	other.clear();
     }
     ////////////
