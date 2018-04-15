@@ -1,8 +1,9 @@
-public class MyLinkedListImproved<T>{
- private Node first, last;
+import java.util.*;
+public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T> {
+    private Node first, last;
     private int length;
 
-    //Impor0tant Method
+    //Important Method
     private Node getNode(int index){
 	Node current = first;
 	if(index == length - 1){
@@ -15,7 +16,7 @@ public class MyLinkedListImproved<T>{
     }
 
     //Constructor
-    public MyLinkedList(){
+    public MyLinkedListImproved(){
 	length = 0;
     }
 
@@ -55,7 +56,7 @@ public class MyLinkedListImproved<T>{
 	    throw new IndexOutOfBoundsException();
 	}
         Node target = getNode(index);
-        Integer oldValue = target.getValue();
+        T oldValue = target.getValue();
 	target.setValue(value);
 	return oldValue;
     }
@@ -161,7 +162,7 @@ public class MyLinkedListImproved<T>{
 	private Node next, prev;
 	private T data;
 
-	public Node(Integer data){
+	public Node(T data){
 	    this.data = data;
 	    prev = null;
 	    next = null;
@@ -195,11 +196,92 @@ public class MyLinkedListImproved<T>{
 	    return "" + data;
 	}
     }
+    ///////////
+    //Compare//
+    //////////
 
-    ////////
+
+    public int max(){
+	int max = 0;
+	int i = 0;
+	T compare = first.getValue();
+	for(T current: this){
+	    if(current.compareTo(compare) > 0){
+		compare = current;
+		max = i;
+	    }
+	    i++;
+	}
+	return max;
+    }
+    
+    public int min(){
+	int min = 0;
+	int i = 0;
+	T compare = first.getValue();
+	for(T current: this){
+	    if(current.compareTo(compare) < 0){
+		compare = current;
+		min = i;
+	    }
+	    i++;
+	}
+	return min;
+    }
+
+    public void extend(MyLinkedListImproved<T> other){
+	length = this.size() + other.size();
+	last.setNext(other.getNode(0));
+	other.getNode(0).setPrev(last);
+	last = other.getNode(other.size()-1);
+	other.clear();
+    }
+    ////////////
+    //Iterator//
+    ////////////
+
+    public Iterator<T> iterator(){
+	return new ListIterator(first);
+    }
+
+    private class ListIterator implements Iterator<T>{
+	private Node current;
+
+	public ListIterator(Node data){
+	    current = data;
+	}
+
+	public boolean hasNext(){
+	    return !(current == null);
+	}
+
+	public T next(){
+	    if(!(hasNext())){
+		    throw new NoSuchElementException();
+		}
+		T result = current.getValue();
+		current = current.getNext();
+		return result;
+		}
+	}
+	////////
     //Main//
     ////////
-
-
+    public static void main(String[] args){
+	MyLinkedListImproved<Integer> test = new MyLinkedListImproved<>();
+	MyLinkedListImproved<Integer> test2 = new MyLinkedListImproved<>();
+	test.add(1);
+	System.out.println(test);
+	test.add(2);
+	System.out.println(test);
+	System.out.println(test.min());
+	test2.add(1);
+	test2.add(5);
+	test.extend(test2);
+	System.out.println(test);
+	System.out.println(test2);
+	System.out.println(test.size());
+	System.out.println(test2.size());
+    }
 
 }

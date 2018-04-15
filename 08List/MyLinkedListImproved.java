@@ -200,36 +200,47 @@ public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T
     //Compare//
     //////////
 
+
     public int max(){
 	int max = 0;
-	Node current = first;
+	int i = 0;
 	T compare = first.getValue();
-	for(int i = 0; i < length; i++){	
-	    if(compare.compareTo(current.getValue()) > 0){
+	for(T current: this){
+	    if(current.compareTo(compare) > 0){
+		compare = current;
 		max = i;
-		compare = current.getValue();
 	    }
-	    current = current.getNext();
+	    i++;
 	}
 	return max;
     }
-
+    
     public int min(){
 	int min = 0;
-	Node current = first;
-	for(int i = 0; i < length; i++){	
-	    if(current.getValue().compareTo(getNode(i).getValue()) < 0){
+	int i = 0;
+	T compare = first.getValue();
+	for(T current: this){
+	    if(current.compareTo(compare) < 0){
+		compare = current;
 		min = i;
-		current = getNode(i);
 	    }
+	    i++;
 	}
 	return min;
     }
 
-    //public void extend(MyLinkedListImproved<T> other){
-
-
-    //}
+    public void extend(MyLinkedListImproved<T> other){
+	if(size() == 0){
+	    first = other.first;
+	    last = other.last;
+	} else if(other.size() != 0){
+	    last.setNext(other.getNode(0));
+	    other.getNode(0).setPrev(last);
+	    last = other.getNode(other.size()-1);
+	}
+	length = this.size() + other.size();
+	other.clear();
+    }
     ////////////
     //Iterator//
     ////////////
@@ -250,21 +261,32 @@ public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T
 	}
 
 	public T next(){
-	    T result = current.getValue();
-	    current = current.getNext();
-	    return result;
+	    if(!(hasNext())){
+		    throw new NoSuchElementException();
+		}
+		T result = current.getValue();
+		current = current.getNext();
+		return result;
+		}
 	}
-    }
-    ////////
+	////////
     //Main//
     ////////
     public static void main(String[] args){
 	MyLinkedListImproved<Integer> test = new MyLinkedListImproved<>();
+	MyLinkedListImproved<Integer> test2 = new MyLinkedListImproved<>();
 	test.add(1);
 	System.out.println(test);
 	test.add(2);
 	System.out.println(test);
-	System.out.println(test.max());
+	System.out.println(test.min());
+	test2.add(1);
+	test2.add(5);
+	test.extend(test2);
+	System.out.println(test);
+	System.out.println(test2);
+	System.out.println(test.size());
+	System.out.println(test2.size());
     }
 
 }

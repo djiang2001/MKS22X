@@ -1,6 +1,24 @@
-public class sorts{
+import java.util.*;
+public class Sorts{
     public static void radixsort(MyLinkedListImproved<Integer> data){
-
-
+	@SuppressWarnings("unchecked");
+	MyLinkedListImproved<Integer>[] posAry = new MyLinkedListImproved<>[10];
+	@SuppressWarnings("unchecked");
+	MyLinkedListImproved<Integer>[] negAry = new MyLinkedListImproved<>{10];
+	for(int i = 0; i < 10; i++){
+	    posAry[i] = new MyLinkedListImproved<Integer>;
+	    negAry[i] = new MyLinkedListImproved<Integer>;
+	}
+	int maxLength = Math.abs(data.max()).size();
+	for(int i = 0; i < maxLength; i++){
+	    for (Integer current : data){
+		if (current > 0){
+		    posAry[].add(current);
+		}
+		else {
+		    negAry[].add(current);
+		}
+	    }
+	}
     }
 }
