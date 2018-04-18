@@ -1,0 +1,10 @@
+import java.util.*;
+
+public class Stack<T>{
+    public LinkedList<T> list;
+    public Stack(){
+	list = new LinkedList();
+    }
+
+
+}
