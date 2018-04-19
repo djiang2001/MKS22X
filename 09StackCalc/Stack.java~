@@ -1,34 +1,42 @@
 import java.util.*;
 
-public class Stack<T>{
-    public LinkedList<T> list;
-    
+public class Stack{
+    public LinkedList<Double> list;
+
+    @SuppressWarnings("unchecked")
     public Stack(){
 	list = new LinkedList();
     }
 
-    public T push(T item){
+    public void push(Double item){
 	list.add(item);
-	return item;
     }
 
-    public T pop(){
+    public Double pop(){
 	int index = list.size()-1;
 	list.remove(index);
 	return list.get(index);
     }
 
-    public T peek(){
+    public Double peek(){
 	int top = list.size()-1;
-	return list.get(index):
+	return list.get(top);
     }
 
     public String toString(){
 	String result = "";
-	for(T item: 1){
-	    result += val + " ";
+	for(Double item: list){
+	    result += item + " ";
 	}
 	return result;
     }
-    
+
+    /*
+    public static void main(String[]args){
+	Stack test = new Stack();
+	test.push(1.0);
+	test.push(2.0);
+	System.out.println(test.peek());
+    }
+    */
 }

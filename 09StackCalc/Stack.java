@@ -13,14 +13,13 @@ public class Stack{
     }
 
     public Double pop(){
-	int index = list.size()-1;
-	list.remove(index);
-	return list.get(index);
+	Double index = list.getLast();
+	list.removeLast();
+	return index;
     }
 
     public Double peek(){
-	int top = list.size()-1;
-	return list.get(top);
+	return list.getLast();
     }
 
     public String toString(){
