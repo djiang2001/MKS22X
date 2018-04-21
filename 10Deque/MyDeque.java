@@ -115,7 +115,7 @@ public class MyDeque<E>{
 
 
  
-    public static void main(String[] args) {
+    /*  public static void main(String[] args) {
 	MyDeque<String> a = new MyDeque<>(), a1 = new MyDeque<>();
 	ArrayList<String> b = new ArrayList<>();
 
@@ -161,6 +161,6 @@ public class MyDeque<E>{
 	    System.out.println("Your deque is bug-free!");
 	}
     }
-
+    */
 }
 
