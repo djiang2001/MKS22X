@@ -1,0 +1,23 @@
+public class MyHeap{
+    private int length;
+    private String data[];
+    private boolean isMax;
+    
+    MyHeap(){
+	this(true);
+    }
+
+    MyHeap(boolean switch){
+	if(switch){
+	    isMex = true;
+	}else {
+	    isMax = false;
+	}
+	length = 0;
+	data = new String[10];
+
+    }
+
+    
+
+}
