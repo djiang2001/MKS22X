@@ -1,0 +1,22 @@
+public class RunningMedian{
+    private int length;
+    private Double[] container;
+    private MyHeap min;
+    private MyHeap max;
+
+    public RunningMedian(){
+
+    }
+
+    public void add(Double data){
+
+    }
+
+    public Double getMedian(){
+
+    }
+
+    public int size(){
+
+    }
+}
