@@ -1,0 +1,6 @@
+public class FrontierQueue implements Frontier{
+
+    public FrontierQueue(int ex,int why,int pleb){
+	super(ex,why,pleb);
+    }
+}
