@@ -15,26 +15,24 @@ public class RunningMedian{
 	if(size() == 0){
 	    min.add(data);
 	    length++;
+	    return;
 	}
-	Double median = getMedian();
-	if(data > median){
+
+	if(data > max.peek()){
 	    max.add(data);
-	    length++;
-	} 
-	if(data < median){
+	} else{
 	    min.add(data);
-	    length++;
 	}
-	if(data == median){
-	    min.add(data);
-	    length++;
+	
+	if(Math.abs(max.size() - min.size()) > 1){
+	    if(min.size() > max.size()){
+		max.add(min.remove());
+	    }
+	    else{
+		min.add(max.remove());
+	    }
 	}
-	if(max.size() - min.size() > 2){
-	    min.add(max.remove());
-	}
-	if(min.size() - max.size() > 2){
-	    max.add(min.remove());
-	}
+	length++;
     }
 
     public Double getMedian(){
@@ -47,14 +45,22 @@ public class RunningMedian{
 	if(min.size() < max.size()){
 	    return max.peek();
 	} else
-	{
-	    return min.peek();
-	}
+	    {
+		return min.peek();
+	    }
     }
 
     public int size(){
 	return length;
     }
 
-    
+    public static void main(String[] args){
+	RunningMedian median = new RunningMedian();
+	median.add(12.3);
+	median.add(11.2);
+	median.add(15.5);
+	median.add(17.3);
+
+	System.out.println("" + median.getMedian());
+    }
 }
