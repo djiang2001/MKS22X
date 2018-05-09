@@ -1,8 +1,7 @@
 public class Location{
     private int x,y;
     private Location previous;
-    private int distanceToStart;
-    
+
     public Location(int _x, int _y, Location prev){
 	x = _x;
 	y = _y;
@@ -16,13 +15,4 @@ public class Location{
     public static int getY(){
 	return y;
     }
-
-    public getDistance(){
-	return distanceToStart;
-    }
-
-    public Location getPrev(){
-	return previous;
-    }
-    
 }
