@@ -95,8 +95,7 @@ public class MyHeap<T extends Comparable<T>>{
 	return result;
     }
 
-    public static void main(String[]args){
-
+       public static void main(String[]args){
     }
 }
 

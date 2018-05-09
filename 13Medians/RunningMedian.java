@@ -18,7 +18,7 @@ public class RunningMedian{
 	    return;
 	}
 
-	if(data > max.peek()){
+	if(data > min.peek()){
 	    max.add(data);
 	} else{
 	    min.add(data);
@@ -56,10 +56,10 @@ public class RunningMedian{
 
     public static void main(String[] args){
 	RunningMedian median = new RunningMedian();
-	median.add(12.3);
-	median.add(11.2);
-	median.add(15.5);
-	median.add(17.3);
+	median.add(4.0);
+	median.add(1.0);
+	median.add(2.0);
+	median.add(3.0);
 
 	System.out.println("" + median.getMedian());
     }
