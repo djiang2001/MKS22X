@@ -1,7 +1,7 @@
-public class Location{
+public class Location implements Comparable<Location>{
     private int x,y;
     private Location previous;
-    private int distanceToStart;
+    private int distanceToEnd;
     
     public Location(int _x, int _y, Location prev){
 	x = _x;
@@ -18,11 +18,26 @@ public class Location{
     }
 
     public getDistance(){
-	return distanceToStart;
+	return distanceToEnd;
     }
 
+    public setDistance(int d){
+	distanceToEnd = d;
+    }
+	
     public Location getPrev(){
 	return previous;
+    }
+
+    public int compareTo(Location l){
+	if(getDistance() > l.getDistance()){
+	    return 1;
+	} else if(getDistance() == l.getDistance()){
+	    return 0;
+	}else
+	    {
+		return -1;
+	    }
     }
     
 }

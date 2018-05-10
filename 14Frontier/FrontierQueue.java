@@ -16,6 +16,7 @@ public class FrontierQueue implements Frontier{
     }
 
     public boolean hasNext(){
-	return 
+	return heap.size() >= 1;
+    }
     
 }

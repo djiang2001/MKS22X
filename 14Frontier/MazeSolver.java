@@ -12,8 +12,21 @@ public class MazeSolver{
     //mode: required to allow for alternate solve modes.
     //0: BFS
     //1: DFS
+    //2: Priority
     public boolean solve(int mode){
-	//initialize your frontier
+	if(mode == 0){
+	frontier = new FrontierQueue;
+	while(frontier.hasNext()){
+
+	}
+	}
+	}
+
+	if(mode == 1){
+	    frontier = new FrontierStack();
+	    while(frontier.hasNext()){
+	    }
+	}
 	//while there is stuff in the frontier:
 	//  get the next location
 	//  process the location to find the locations (use the maze to do this)
