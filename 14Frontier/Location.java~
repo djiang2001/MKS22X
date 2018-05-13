@@ -9,19 +9,19 @@ public class Location implements Comparable<Location>{
 	previous = prev;
     }
 
-    public int getX(){
+    public static int getX(){
 	return x;
     }
 
-    public int getY(){
+    public static int getY(){
 	return y;
     }
 
-    public int getDistance(){
+    public getDistance(){
 	return distanceToEnd;
     }
 
-    public void setDistance(int d){
+    public setDistance(int d){
 	distanceToEnd = d;
     }
 	
@@ -29,18 +29,15 @@ public class Location implements Comparable<Location>{
 	return previous;
     }
 
-    public void setPrev(Location prev){
-	previous = prev;
-    }
-
     public int compareTo(Location l){
 	if(getDistance() > l.getDistance()){
 	    return 1;
 	} else if(getDistance() == l.getDistance()){
 	    return 0;
-	}else{
-	    return -1;
-	}
+	}else
+	    {
+		return -1;
+	    }
     }
     
 }

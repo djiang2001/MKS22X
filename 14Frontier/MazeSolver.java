@@ -1,9 +1,13 @@
+import java.util.*;
+
 public class MazeSolver{
     private Maze maze;
     private Frontier frontier;
+    private boolean animate;
 
     public MazeSolver(String mazeText){
-    
+	maze = new Maze(mazeText);
+	animate = false;
     }
 
     //Default to BFS
@@ -15,29 +19,69 @@ public class MazeSolver{
     //2: Priority
     public boolean solve(int mode){
 	if(mode == 0){
-	frontier = new FrontierQueue;
-	while(frontier.hasNext()){
-
+	    frontier = new FrontierQueue();
 	}
-	}
-	}
-
-	if(mode == 1){
+	else if(mode == 1){
 	    frontier = new FrontierStack();
-	    while(frontier.hasNext()){
+	}
+	/*	else if(mode == 2){
+	    frontier = new FrontierPriorityQueue();
+	}
+	*/
+
+	Location next = maze.getStart();
+	Location end = maze.getEnd();
+
+	frontier.add(next);
+	while(frontier.hasNext()){
+	    next = frontier.next();
+	    maze.set(next.getX(),next.getY(),'@');
+
+	    Location[] neighbors = maze.getNeighbors(next);
+
+	    for(int i = 0; i < neighbors.length; i++){
+		if(neighbors[i] != null){
+		    if(neighbors[i].equals(end)){
+			maze.set(maze.getStart().getX(),maze.getStart().getY(),'S');
+			maze.set(maze.getEnd().getX(),maze.getEnd().getY(),'E');
+			return true;
+		    } else {
+		    frontier.add(neighbors[i]);
+		    maze.set(neighbors[i].getX(),neighbors[i].getY(),'.');
+		    }
+		}
 	    }
 	}
-	//while there is stuff in the frontier:
-	//  get the next location
-	//  process the location to find the locations (use the maze to do this)
-	//  check if any locations are the end, if you found the end just return true!
-	//  add all the locations to the frontier
-	//when there are no more values in the frontier return false
 	return false;
     }
 
     public String toString(){
 	return maze.toString();
+    }
+
+    private void wait(int millis){
+	try {
+	    Thread.sleep(millis);
+	}
+	catch (InterruptedException e) {
+	}
+    }
+    
+    public void setAnimate(boolean b){
+	animate = b;
+    }
+    
+    public void clearTerminal(){
+	//erase terminal, go to top left of screen.
+	System.out.println("\033[2J\033[1;1H");
+    }
+
+    public static void main(String [] args){
+	MazeSolver test = new MazeSolver("test.txt");
+	System.out.println(test);
+	test.setAnimate(true);
+	test.solve();
+	System.out.println(test);
     }
 }
 

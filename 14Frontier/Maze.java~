@@ -19,7 +19,7 @@ public class Maze{
     }
 	
     public Location[] getNeighbors(Location L){
-	Location[] neighbors = new Location[4];
+	Location[] result = new Location[4];
 	int[] xLoc = {0,1,0,-1};
 	int[] yLoc = {1,0,-1,0};
 	int xCur = L.getX();
@@ -28,10 +28,10 @@ public class Maze{
 	    int tryX = xCur + xLoc[i];
 	    int tryY = yCur + yLoc[i];
 	    if(isValid(tryX,tryY)){
-		neighbors[i] = new Location(tryX,tryY,L);
+		result[i] = new Location(tryX,tryY,L);
 	    }
 	}
-	return neighbors;
+	return result;
     }
 
     public Location getStart(){

@@ -1,6 +1,6 @@
 import java.util.*;
 public class FrontierQueue implements Frontier{
-    private LinkedList<Location> locations;    
+    public LinkedList<Location> locations;    
 
     public FrontierQueue(){
 	locations = new LinkedList<Location>();
@@ -15,7 +15,7 @@ public class FrontierQueue implements Frontier{
     }
 
     public boolean hasNext(){
-	return locations.peek() != null;
+	return locations.size() >= 1;
     }
     
 }
