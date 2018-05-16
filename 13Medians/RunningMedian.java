@@ -56,10 +56,10 @@ public class RunningMedian{
 
     public static void main(String[] args){
 	RunningMedian median = new RunningMedian();
-	median.add(4.0);
-	median.add(1.0);
-	median.add(2.0);
-	median.add(3.0);
+	median.add(0.0);
+	median.add(10.0000000000000);
+	median.add(10.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000);
+	median.add(10000000000000000000000000000000000000000000000000000000000000000000.0);
 
 	System.out.println("" + median.getMedian());
     }
