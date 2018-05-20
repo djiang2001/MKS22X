@@ -95,40 +95,6 @@ public class MyHeap<T extends Comparable<T>>{
     }
 
     public static void main(String[]args){
-	MyHeap<String> a = new MyHeap<>(false);
-	String[] b = new String[20];
-	for(int i = 0; i < 20; i++){
-	    int temp = (int)(Math.random() * 26) + 97;
-	    char value = (char)temp;
-	    a.add("" + value);
-	    b[i] = "" + value;
-	}
-
-	Arrays.sort(b);
-
-	System.out.println("MyHeap: " + a);
-	System.out.println("Arrays: "+ Arrays.toString(b));
-
-	boolean isCorrect = true;
-	for(int i = 0; i < 20; i++){
-	    //System.out.println("size: " + a.size());
-	    //System.out.println("heap before: " + a.toT());
-	    String temp = a.remove();
-	    if(!(temp.equals(b[i]))){
-		System.out.println("there is an error");
-		System.out.println(temp);
-		System.out.println(b[i]);
-		System.out.println(a);
-		isCorrect = false;
-	    }
-	}
-
-	if(isCorrect){
-	    System.out.println("Your heap is correct!");
-	}
-	else{
-	    System.out.println("There are error(s)");
-	}
     }
 }
 
