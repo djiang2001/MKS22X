@@ -11,7 +11,7 @@ public class MyHeap<T extends Comparable<T>>{
     }
 
     @SuppressWarnings("unchecked")
-    MyHeap(boolean other){
+	MyHeap(boolean other){
 	if(other){
 	    isMax = true;
 	}else {
@@ -33,25 +33,24 @@ public class MyHeap<T extends Comparable<T>>{
 	   (!isMax && data[index].compareTo(data[(index-1)/2]) < 0)){
 	    swap(index, (index -1)/2);
 	    pushup((index-1)/2);
-	}
+	}	  
     }
 
     public void pushdown(int index){
 	int first = 2*index + 1;
 	int sec = 2*index + 2;
-	if(first < size() && sec < size()){
-	    if(isMax && data[index].compareTo(data[first]) < 0 ||
-	       !isMax && data[index].compareTo(data[first]) > 0){
-		swap(index,first);
-		pushdown(first);
-	    }else
-		if(isMax && data[index].compareTo(data[sec]) < 0 ||
-		   !isMax && data[index].compareTo(data[sec]) > 0){
-		    swap(index,sec);
-		    pushdown(sec);
-		}
-	}
+        if(isMax && first < size() && data[index].compareTo(data[first]) < 0 && (sec >= size() || data[sec].compareTo(data[first]) <= 0) ||
+	   !isMax && first < size() && data[index].compareTo(data[first]) > 0 && (sec >= size() || data[sec].compareTo(data[first]) >= 0)){
+	    swap(index,first);
+	    pushdown(first);
+	}else
+	    if(isMax && sec < size() && data[index].compareTo(data[sec]) < 0 && (first >= size() || data[first].compareTo(data[sec]) <= 0) ||
+	       !isMax && sec < size() && data[index].compareTo(data[sec]) > 0 && (first >= size() || data[first].compareTo(data[sec]) >= 0)){
+		swap(index,sec);
+		pushdown(sec);
+	    }
     }
+
     
     public void add(T str){
 	if (size() == data.length){
@@ -64,7 +63,7 @@ public class MyHeap<T extends Comparable<T>>{
 
     public T remove(){
 	T str = peek();
-	swap(0, size()-1);
+	swap(0,size() - 1);
 	length--;
 	pushdown(0);
 	return str;
@@ -78,7 +77,7 @@ public class MyHeap<T extends Comparable<T>>{
 	return length;
     }
 
-      @SuppressWarnings("unchecked")
+    @SuppressWarnings("unchecked")
     public void resize(){
 	T[] temp = (T[]) new Comparable[2*size()];
 	for(int i = 0; i < size(); i++){
@@ -96,7 +95,6 @@ public class MyHeap<T extends Comparable<T>>{
     }
 
     public static void main(String[]args){
-
     }
 }
 
