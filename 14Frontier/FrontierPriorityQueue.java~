@@ -23,7 +23,7 @@ public class FrontierPriorityQueue implements Frontier{
     }
 
     public boolean hasNext(){
-	return heap.size > 0;
+	return heap.size() > 0;
     }
 
     public String toString(){

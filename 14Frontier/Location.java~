@@ -42,5 +42,9 @@ public class Location implements Comparable<Location>{
 	    return -1;
 	}
     }
+
+    public boolean equals(Location l){
+	return x == l.getX() && y == l.getY();
+    }
     
 }
