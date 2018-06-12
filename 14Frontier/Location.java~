@@ -1,12 +1,13 @@
 public class Location implements Comparable<Location>{
-    private int x,y;
+    private int x,y,startDist,priority;
     private Location previous;
-    private int distanceToEnd;
     
-    public Location(int _x, int _y, Location prev){
+    public Location(int _x, int _y, Location prev, int priority, int dist){
 	x = _x;
 	y = _y;
 	previous = prev;
+	this.priority = priority;
+	startDist = dist;
     }
 
     public int getX(){
@@ -18,11 +19,11 @@ public class Location implements Comparable<Location>{
     }
 
     public int getDistance(){
-	return distanceToEnd;
+	return startDist;
     }
 
     public void setDistance(int d){
-	distanceToEnd = d;
+	startDist = d;
     }
 	
     public Location getPrev(){
@@ -34,17 +35,15 @@ public class Location implements Comparable<Location>{
     }
 
     public int compareTo(Location l){
-	if(getDistance() > l.getDistance()){
-	    return 1;
-	} else if(getDistance() == l.getDistance()){
-	    return 0;
-	}else{
-	    return -1;
-	}
+	return getDistance() - l.getDistance();
     }
 
     public boolean equals(Location l){
 	return x == l.getX() && y == l.getY();
+    }
+
+    public int getPriority(){
+	return priority;
     }
     
 }

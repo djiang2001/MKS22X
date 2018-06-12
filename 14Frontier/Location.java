@@ -35,7 +35,7 @@ public class Location implements Comparable<Location>{
     }
 
     public int compareTo(Location l){
-	return getDistance() - l.getDistance();
+	return getPriority() - l.getPriority();
     }
 
     public boolean equals(Location l){

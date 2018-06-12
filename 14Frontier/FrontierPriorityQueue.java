@@ -12,9 +12,6 @@ public class FrontierPriorityQueue implements Frontier{
     }
     
     public Location next(){
-	if (!hasNext()){
-	    throw new NullPointerException();
-	}
 	return heap.remove();
     }
 
